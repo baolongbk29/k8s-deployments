@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doclib
+  namespace: ocr-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doclib
+  template:
+    metadata:
+      labels:
+        app: doclib
+    spec:
+      containers:
+        - name: doclib
+          image: longlam071/doclib:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: app-storage
+              mountPath: /app/data
+      volumes:
+        - name: app-storage
+          persistentVolumeClaim:
+            claimName: doclib-pvc

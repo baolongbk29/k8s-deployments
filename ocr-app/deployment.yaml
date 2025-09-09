@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocr-app
+  namespace: ocr-service
+  labels:
+    app: ocr-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ocr-app
+  template:
+    metadata:
+      labels:
+        app: ocr-app
+    spec:
+      containers:
+        - name: ocr-app-container
+          image: longlam071/ocr_app:1.0.8
+          ports:
+            - containerPort: 8000
+          env:
+            - name: HOME
+              value: /tmp
+          resources:
+            requests:
+              cpu: "2"
+              memory: 2Gi
+              ephemeral-storage: 5Gi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+              ephemeral-storage: 5Gi
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: ocr-app-form
+              mountPath: /app/forms
+            - name: ocr-data
+              mountPath: /app/data_ocr
+      volumes:
+        - name: ocr-app-form
+          persistentVolumeClaim:
+            claimName: ocr-app-pvc
+        - name: ocr-data
+          persistentVolumeClaim:
+            claimName: ocr-data-pvc

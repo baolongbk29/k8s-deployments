@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: doclib
+  namespace: ocr-service
+spec:
+  host: doclib.apps.ocp.seatechit.com.vn
+  to:
+    kind: Service
+    name: doclib
+  port:
+    targetPort: 8000
+  tls:
+    termination: edge

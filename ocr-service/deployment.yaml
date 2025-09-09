@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocr-service
+  namespace: ocr-service
+  labels:
+    app: ocr-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ocr-service
+  template:
+    metadata:
+      labels:
+        app: ocr-service
+    spec:
+      containers:
+        - name: ocr-service
+          image: 'longlam071/ocr-service:1.0.1'
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            - name: HOME
+              value: /tmp
+          resources:
+            limits:
+              cpu: '8'
+              ephemeral-storage: 5Gi
+              memory: 8Gi
+            requests:
+              cpu: '8'
+              ephemeral-storage: 5Gi
+              memory: 8Gi

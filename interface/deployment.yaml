@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: interface
+  namespace: ocr-service
+  labels:
+    app: interface
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: interface
+  template:
+    metadata:
+      labels:
+        app: interface
+    spec:
+      containers:
+        - name: interface
+          image: longlam071/interface:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000

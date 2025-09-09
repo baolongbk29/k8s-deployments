@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: interface
+  namespace: ocr-service
+spec:
+  host: interface.apps.ocp.seatechit.com.vn
+  to:
+    kind: Service
+    name: interface
+  port:
+    targetPort: 8000
+  tls:
+    termination: edge
