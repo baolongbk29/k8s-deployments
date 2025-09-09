@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: interface
-          image: longlam071/interface:1.0.0
+          image: longlam071/interface:1.0.5
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
