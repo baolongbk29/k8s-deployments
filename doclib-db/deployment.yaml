@@ -23,10 +23,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: doclib-db-secret
-                  key: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: doclib-db-secret
                   key: MYSQL_PASSWORD
           volumeMounts:
             - name: doclib-db-storage
