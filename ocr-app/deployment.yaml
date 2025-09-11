@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: ocr-app-container
-          image: longlam071/ocr_app:1.0.13
+          image: longlam071/ocr_app:1.0.15
           ports:
             - containerPort: 8000
           env:
